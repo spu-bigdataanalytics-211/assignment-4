@@ -1,0 +1,31 @@
+MapReduce Summary
+By
+Akshay Srivastava 
+MapReduce is programming model that processes and creates large data sets where users specify a map function which is used to process a key/value pair to generate a set of intermediate key/value pairs. A reduce function is used to combine all the intermediate key/values.
+Introduction
+At Google people have been working on relatively simpler computational problems but the data is so big that they must use multiple machines to be able to finish in time. While doing so, to circumvent failures the code becomes excessively long and complex. In thinking about how to tackle this problem they realized that most of the computation is done where they are looking for a target key/value pair and in the end sum that to solve the problem at hand, this is where the MapReduce was invented.
+Example
+The first example on the paper is the best example of MapReduce as well, counting the number of occurrence of a word in a long text file. Here the map function checks the number of occurrences of the word and the reduce function counts the total number of occurrences.
+Implementation
+There are multiple ways of implementing the MapReduce algorithm or method, depending on the environment. The amount of machines available, commodity network hardware, cluster of machines and storage.
+Execution Overview
+First, the MapReduce model splits the input file into a user defined number of pieces then runs the program on a cluster of different machines. One copy is the master that assigns any of the idle clusters to work on Map or Reduce tasks. A mapper reads the file and outputs the key/value pairs to be processed by the reducer cluster. The mapper store the information on the local desk and it is the responsibility of the master to forward these to the reducer to be compiled. 
+Master Data Structures
+The master is the main authority over managing all the tasks (mapping, sorting and reducing). It has several data structures for each MapReduce task and stores the identity of each worker. The location and identity of these workers is updated as the tasks are finished.
+Fault Tolerance
+One of the biggest advantages of using this algorithm/model is the capability of reducing machine failures. When using so many machines it is very important to be able to control this and is one of the main reasons of its popularity.
+
+Worker Failure
+The master keeps track of the status of every worker, if it doesn�t get a response from a worker in a certain amount of time, its deemed worker as failed. Once a worker is finished with a task its marked as idle, and the master gives it another task. Map taks are stored on a local disk and need to be re executed if failed but reduce tasks doesn�t need to be reexecuted as its saved on a  global file.
+Master Failure
+The model aborts if the master fails as there is only one master.
+Performance
+The performance is measured by running the searches on one system of machines and the sorting on another system of machines.
+Each element is tracked and the configuration, sorting process, backups, machine failures are recorded and assessed.
+Experience
+The first version of the MapReduce library in February of 2003 and then a revision was done in August 2003. It has been used in Google for a wide range of applications like
+- Machine learning problem
+- Clustering problem for Google news
+- Extracting data used to produce reports of popular queries
+Conclusion
+The Mapreduce algorithm has gained extensive popularity in data science due to us ease of use, understanding, execution and implementation.
